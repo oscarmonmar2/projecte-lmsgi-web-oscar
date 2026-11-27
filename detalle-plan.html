@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitPlan Generator - Pla Personalitzat</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; background-color: #f8f9fa; }
+    header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; }
+    nav a { color: #38bdf8; text-decoration: none; font-weight: bold; }
+    main { max-width: 800px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 8px; }
+    .box { background: #e0f2fe; border-left: 4px solid #0284c7; padding: 15px; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f1f5f9; }
+    footer { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 10px; text-align: center; color: #666; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FitPlan Generator</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inici / Formulari</a></li>
+        <li><a href="catalogo.html">Gimnasos</a></li>
+        <li><a href="detalle-plan.html">Veure Pla Generat</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <header>
+        <h2>Pla Personalitzat #FP-2026-089</h2>
+        <p>Gimnàs Seleccionat: <strong id="mostrar-gimnasio">Basic-Fit / McFit Central</strong> | Objectiu: <strong id="mostrar-objetivo">Guanyar Massa Muscular</strong></p>
+      </header>
+
+      <section class="box">
+        <h3>Dades de l'Usuari</h3>
+        <ul>
+          <li><strong>Edat:</strong> <span id="mostrar-edad">24</span> anys</li>
+          <li><strong>Pes:</strong> <span id="mostrar-peso">75.5</span> kg | <strong>Altura:</strong> <span id="mostrar-altura">178</span> cm</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>1. Dieta Recomanada</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Àpat</th>
+              <th>Aliments Suggerits</th>
+              <th>Macronutrients</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Esmorzar</td>
+              <td>Cereal d'avena amb llet, plàtan i truita de 3 ous</td>
+              <td>35g Prot / 65g Carbs</td>
+            </tr>
+            <tr>
+              <td>Dinar</td>
+              <td>Arròs integral amb pit de pollastre i verdures al vapor</td>
+              <td>45g Prot / 80g Carbs</td>
+            </tr>
+            <tr>
+              <td>Sopar</td>
+              <td>Filet de salmó a la planxa amb creïlla bullida</td>
+              <td>40g Prot / 40g Carbs</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <br>
+
+      <section>
+        <h3>2. Rutina d'Entrenament Adaptada</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Exercici</th>
+              <th>Màquina del Gimnàs</th>
+              <th>Sèries x Repeticions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Press de Pit</td>
+              <td>Màquina Convergent / Multipower</td>
+              <td>4 sèries x 8-10 reps</td>
+            </tr>
+            <tr>
+              <td>Premsa de Cames</td>
+              <td>Premsa Inclinada 45°</td>
+              <td>4 sèries x 10-12 reps</td>
+            </tr>
+            <tr>
+              <td>Jaló al Pit</td>
+              <td>Politja Alta amb Agarre Ample</td>
+              <td>3 sèries x 12 reps</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p><a href="catalogo.html">&larr; Tornar al catàleg de gimnasos</a></p>
+    <p>&copy; 2026 FitPlan Generator - Projecte LMSGI ASIX</p>
+  </footer>
+
+  <!-- Codi JS per a llegir les dades del formulari -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('edad')) document.getElementById('mostrar-edad').textContent = params.get('edad');
+    if (params.get('peso')) document.getElementById('mostrar-peso').textContent = params.get('peso');
+    if (params.get('altura')) document.getElementById('mostrar-altura').textContent = params.get('altura');
+    if (params.get('objetivo')) document.getElementById('mostrar-objetivo').textContent = params.get('objetivo');
+    if (params.get('gimnasio')) document.getElementById('mostrar-gimnasio').textContent = params.get('gimnasio');
+  </script>
+
+</body>
+</html>

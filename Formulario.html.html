@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario de registro y perfil antropométrico para FitPlan Generator.">
+  <title>FitPlan Generator - Registro y Perfil de Usuario</title>
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --text: #0f172a;
+      --muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --error: #dc2626;
+      --success: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+      background-color: var(--bg);
+      padding: 2rem 1rem;
+      margin: 0;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+
+    fieldset {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    legend {
+      font-weight: 700;
+      padding: 0 0.5rem;
+      color: var(--text);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .required-mark {
+      color: var(--error);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      font-size: 1rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    /* Estilos visuales en tiempo real (Validación cliente) */
+    input:user-invalid {
+      border-color: var(--error);
+    }
+
+    input:user-valid {
+      border-color: var(--success);
+    }
+
+    .help-text {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.85rem;
+      color: var(--error);
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+
+    input:user-invalid ~ .error-msg {
+      display: block;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+    }
+
+    button[type="submit"] {
+      background-color: var(--primary);
+      color: #ffffff;
+      flex: 1;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--primary-hover);
+    }
+
+    button[type="reset"] {
+      background-color: #e2e8f0;
+      color: var(--text);
+    }
+
+    .status-banner {
+      display: none;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      font-weight: 600;
+    }
+
+    .status-banner.success {
+      display: block;
+      background-color: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>Crear Perfil en FitPlan Generator</h1>
+    <p>Completa tus datos para calcular tu plan nutricional y rutina personalizada. Los campos marcados con <span class="required-mark">*</span> son obligatorios.</p>
+
+    <form id="registroForm" action="#" method="get">
+      <fieldset>
+        <legend>Datos personales y de acceso</legend>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Correo electrónico <span class="required-mark" aria-hidden="true">*</span></label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="Ej: usuario@ejemplo.com" 
+            aria-describedby="email-help email-err"
+            required>
+          <span id="email-help" class="help-text">Recibirás aquí tu ficha de dieta y rutina en PDF.</span>
+          <span id="email-err" class="error-msg" role="alert">Introduce un correo electrónico válido (ej. nombre@dominio.com).</span>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+          <label for="telefono">Teléfono móvil <span class="required-mark" aria-hidden="true">*</span></label>
+          <input 
+            type="tel" 
+            id="telefono" 
+            name="telefono" 
+            placeholder="+34 666 777 888" 
+            pattern="^\+34 [0-9]{3} [0-9]{3} [0-9]{3}$"
+            aria-describedby="tel-help tel-err"
+            required>
+          <span id="tel-help" class="help-text">Formato obligatorio español con espacios: +34 666 777 888</span>
+          <span id="tel-err" class="error-msg" role="alert">El teléfono debe seguir exactamente el formato +34 XXX XXX XXX.</span>
+        </div>
+
+        <!-- Fecha de nacimiento (Mayor de 18 años respecto a Noviembre 2026) -->
+        <div class="form-group">
+          <label for="nacimiento">Fecha de nacimiento <span class="required-mark" aria-hidden="true">*</span></label>
+          <input 
+            type="date" 
+            id="nacimiento" 
+            name="nacimiento" 
+            min="1926-01-01"
+            max="2008-11-22" 
+            aria-describedby="fecha-help fecha-err"
+            required>
+          <span id="fecha-help" class="help-text">Debes ser mayor de 18 años (nacido antes del 22/11/2008).</span>
+          <span id="fecha-err" class="error-msg" role="alert">Fecha no válida. Debes tener al menos 18 años cumplidos.</span>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group">
+          <label for="password">Contraseña <span class="required-mark" aria-hidden="true">*</span></label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            minlength="8" 
+            aria-describedby="pass-help pass-err"
+            required>
+          <span id="pass-help" class="help-text">Mínimo 8 caracteres para proteger tu historial físico.</span>
+          <span id="pass-err" class="error-msg" role="alert">La contraseña debe contener al menos 8 caracteres.</span>
+        </div>
+
+        <!-- Campo opcional (para caso edge de mínimos) -->
+        <div class="form-group">
+          <label for="peso">Peso actual (kg) (Opcional)</label>
+          <input 
+            type="number" 
+            id="peso" 
+            name="peso" 
+            min="30" 
+            max="250" 
+            step="0.1" 
+            placeholder="Ej: 75.5"
+            aria-describedby="peso-help">
+          <span id="peso-help" class="help-text">Puedes dejarlo en blanco y configurarlo más tarde en tu perfil.</span>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit">Guardar y Generar Plan</button>
+        <button type="reset">Limpiar</button>
+      </div>
+
+      <div id="form-feedback" class="status-banner" role="status" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('registroForm');
+    const feedback = document.getElementById('form-feedback');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      if (form.checkValidity()) {
+        feedback.textContent = '✅ ¡Perfil validado correctamente! Generando tu dieta y rutina adaptada...';
+        feedback.className = 'status-banner success';
+      }
+    });
+
+    form.addEventListener('reset', function() {
+      feedback.className = 'status-banner';
+      feedback.textContent = '';
+    });
+  </script>
+
+</body>
+</html>

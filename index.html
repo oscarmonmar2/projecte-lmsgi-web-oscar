@@ -3,87 +3,936 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitPlan Generator - Inicio</title>
+  <meta name="description" content="FitPlan Generator: Diseña tu plan de nutrición y rutina de entrenamiento personalizada adaptada a tu gimnasio.">
+  <title>FitPlan Generator - Plataforma Unificada</title>
+
+  <!-- Carga de Tailwind CSS para diseño moderno, fluido y responsive -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuente Inter para una legibilidad óptima -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Esquema JSON-LD preservado de la galería original -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Equipamiento y Zona de Musculación en Synergym",
+    "description": "Explora el catálogo de bancadas ajustables, mancuerneros y racks de entrenamiento de Synergym.",
+    "image": [
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "datePublished": "2026-10-15T09:00:00+01:00",
+    "dateModified": "2026-10-20T10:30:00+01:00",
+    "author": {
+      "@type": "Organization",
+      "name": "FitPlan Studio ASIX"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "FitPlan Generator",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://placehold.co/200x60/1e293b/38bdf8?text=FitPlan+Generator"
+      }
+    },
+    "license": "https://unsplash.com/license"
+  }
+  </script>
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; line-height: 1.6; background-color: #f8f9fa; }
-    header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; flex-wrap: wrap; gap: 10px; }
-    header h1 { margin: 0; font-size: 1.4rem; }
-    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; flex-wrap: wrap; }
-    nav a { color: #38bdf8; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 800px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; font-weight: bold; margin-bottom: 5px; }
-    input, select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-    button { background: #0284c7; color: #fff; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; }
-    footer { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 10px; text-align: center; color: #666; }
+    /* Configuración base de tipografía y colores de identidad */
+    :root {
+      --slate-dark: #1e293b;
+      --sky-primary: #0284c7;
+      --sky-hover: #0369a1;
+      --sky-accent: #38bdf8;
+      --error-red: #dc2626;
+      --success-green: #16a34a;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Transiciones suaves para cambios de vista */
+    .view-section {
+      display: none;
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Estilos de validación accesible para el formulario de Registro */
+    .validated-input:user-invalid {
+      border-color: var(--error-red) !important;
+      background-color: #fef2f2;
+    }
+
+    .validated-input:user-valid {
+      border-color: var(--success-green) !important;
+    }
+
+    .error-msg {
+      display: none;
+    }
+
+    .validated-input:user-invalid ~ .error-msg {
+      display: block;
+    }
+
+    /* Anillos de enfoque de alta accesibilidad para navegación por teclado (especialmente en tablas) */
+    table :focus,
+    [tabindex="0"]:focus {
+      outline: 3px solid var(--sky-primary);
+      outline-offset: -2px;
+      background-color: #f0f9ff;
+    }
   </style>
 </head>
-<body>
+<body class="antialiased selection:bg-sky-200 selection:text-slate-900">
 
-  <header>
-    <h1>FitPlan Generator</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="catalogo.html">Gimnasios</a></li>
-        <li><a href="detalle-plan.html">Pla Generat</a></li>
-        <li><a href="tabla.html">Dieta (Taula)</a></li>
-        <li><a href="galeria.html">Galeria</a></li>
-        <li><a href="formulario.html">Registre</a></li>
-      </ul>
-    </nav>
+  <!-- Barra de Navegación Superior Unificada -->
+  <header class="bg-[#1e293b] text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
+      <!-- Logotipo / Marca -->
+      <a href="#inicio" onclick="navigateTo('inicio'); return false;" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-[#38bdf8] rounded-lg px-1">
+        <span class="bg-[#0284c7] text-white p-1.5 rounded-lg shadow-sm group-hover:bg-[#38bdf8] group-hover:text-slate-900 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h2m14 0h2M5 7v6m14-6v6M7 10h10M9 6v8m6-8v8" />
+          </svg>
+        </span>
+        <h1 class="text-xl font-extrabold tracking-tight text-white">FitPlan Generator</h1>
+      </a>
+
+      <!-- Menú de Navegación Responsive -->
+      <nav aria-label="Navegación principal">
+        <ul class="flex flex-wrap items-center gap-1.5 sm:gap-2 text-sm font-semibold">
+          <li>
+            <button type="button" data-nav="inicio" onclick="navigateTo('inicio')" class="nav-btn px-3 py-2 rounded-lg transition-colors text-[#38bdf8] hover:bg-slate-800">
+              Inicio
+            </button>
+          </li>
+          <li>
+            <button type="button" data-nav="catalogo" onclick="navigateTo('catalogo')" class="nav-btn px-3 py-2 rounded-lg transition-colors text-[#38bdf8] hover:bg-slate-800">
+              Gimnasios
+            </button>
+          </li>
+          <li>
+            <button type="button" data-nav="detalle-plan" onclick="navigateTo('detalle-plan')" class="nav-btn px-3 py-2 rounded-lg transition-colors text-[#38bdf8] hover:bg-slate-800">
+              Pla Generat
+            </button>
+          </li>
+          <li>
+            <button type="button" data-nav="tabla" onclick="navigateTo('tabla')" class="nav-btn px-3 py-2 rounded-lg transition-colors text-[#38bdf8] hover:bg-slate-800">
+              Dieta (Taula)
+            </button>
+          </li>
+          <li>
+            <button type="button" data-nav="galeria" onclick="navigateTo('galeria')" class="nav-btn px-3 py-2 rounded-lg transition-colors text-[#38bdf8] hover:bg-slate-800">
+              Galeria
+            </button>
+          </li>
+          <li>
+            <button type="button" data-nav="formulario" onclick="navigateTo('formulario')" class="nav-btn px-3 py-2 rounded-lg transition-colors text-[#38bdf8] hover:bg-slate-800">
+              Registre
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section>
-      <h2>Diseña tu Plan de Nutrición y Entrenamiento</h2>
-      <p>Introduce tus datos personales y el gimnasio al que asistes para generar tu rutina adaptada a las máquinas disponibles y tu dieta personalizada.</p>
+  <!-- Contenedor Principal de Vistas -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-8">
+
+    <!-- =====================================================================
+         1. VISTA: INICIO (GENERADOR DE PLAN)
+         ===================================================================== -->
+    <section id="view-inicio" class="view-section active" aria-labelledby="heading-inicio">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <div class="border-b border-slate-100 pb-5 mb-6">
+          <span class="inline-block bg-sky-100 text-[#0284c7] text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md mb-2">
+            Configurador Inteligente
+          </span>
+          <h2 id="heading-inicio" class="text-2xl sm:text-3xl font-bold text-slate-900">
+            Diseña tu Plan de Nutrición y Entrenamiento
+          </h2>
+          <p class="text-slate-600 mt-2 leading-relaxed">
+            Introduce tus datos personales y el gimnasio al que asistes para generar tu rutina adaptada a las máquinas disponibles y tu dieta personalizada.
+          </p>
+        </div>
+
+        <form id="generatorForm" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="gen-edad" class="block text-sm font-bold text-slate-800 mb-1.5">Edad (años):</label>
+              <input type="number" id="gen-edad" name="edad" min="14" max="99" value="24" placeholder="Ej. 24" required
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0284c7] focus:border-[#0284c7]">
+            </div>
+
+            <div>
+              <label for="gen-peso" class="block text-sm font-bold text-slate-800 mb-1.5">Peso actual (kg):</label>
+              <input type="number" id="gen-peso" name="peso" step="0.1" min="30" max="250" value="75.5" placeholder="Ej. 75.5" required
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0284c7] focus:border-[#0284c7]">
+            </div>
+
+            <div>
+              <label for="gen-altura" class="block text-sm font-bold text-slate-800 mb-1.5">Altura (cm):</label>
+              <input type="number" id="gen-altura" name="altura" min="120" max="230" value="178" placeholder="Ej. 178" required
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0284c7] focus:border-[#0284c7]">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="gen-objetivo" class="block text-sm font-bold text-slate-800 mb-1.5">Objetivo Físico:</label>
+              <select id="gen-objetivo" name="objetivo"
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#0284c7] focus:border-[#0284c7]">
+                <option value="volumen">Subir de peso / Ganar masa muscular</option>
+                <option value="definicion">Bajar de peso / Definir</option>
+                <option value="mantenimiento">Mantenimiento y salud</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="gen-gimnasio" class="block text-sm font-bold text-slate-800 mb-1.5">Selecciona tu Gimnasio:</label>
+              <select id="gen-gimnasio" name="gimnasio"
+                class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#0284c7] focus:border-[#0284c7]">
+                <option value="mcfit">Basic-Fit / McFit Central</option>
+                <option value="synergym">Synergym Fitness</option>
+                <option value="municipal">Gimnasio Municipal</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit"
+              class="w-full sm:w-auto bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold py-3 px-6 rounded-lg shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <span>Generar mi Dieta y Rutina</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </form>
+      </div>
     </section>
 
-    <section>
-      <form action="detalle-plan.html" method="get">
-        <div class="form-group">
-          <label for="edad">Edad (años):</label>
-          <input type="number" id="edad" name="edad" placeholder="Ej. 24" required>
-        </div>
+    <!-- =====================================================================
+         2. VISTA: GIMNASIOS (CATÁLOGO DE EQUIPAMIENTO)
+         ===================================================================== -->
+    <section id="view-catalogo" class="view-section" aria-labelledby="heading-catalogo">
+      <div class="mb-6">
+        <h2 id="heading-catalogo" class="text-2xl sm:text-3xl font-bold text-slate-900">
+          Catàleg de Gimnasos i Equipament
+        </h2>
+        <p class="text-slate-600 mt-1">
+          Consulta les instal·lacions registrades per a la generació automàtica de rutines:
+        </p>
+      </div>
 
-        <div class="form-group">
-          <label for="peso">Peso actual (kg):</label>
-          <input type="number" id="peso" name="peso" step="0.1" placeholder="Ej. 75.5" required>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Tarjeta 1: McFit / Basic-Fit Central -->
+        <article class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col">
+          <div class="relative h-52 bg-slate-800 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+              onerror="this.onerror=null; this.src='https://placehold.co/800x450/1e293b/38bdf8?text=McFit+%2F+Basic-Fit+Central';"
+              alt="Sala de musculació amb màquines de politges i premses"
+              class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-[#1e293b]/90 text-[#38bdf8] text-xs font-bold px-2.5 py-1 rounded-md">
+              Centre Auditado #01
+            </span>
+          </div>
+          <div class="p-6 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">1. McFit / Basic-Fit Central</h3>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                <strong>Equipament disponible:</strong> Premsa inclinada, Multipower, Jaca, Politja alta/baixa, Banc de press de banca, Zona de mancuernes.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <button type="button" onclick="selectGymAndGenerate('mcfit')"
+                class="text-[#0284c7] hover:text-[#0369a1] font-bold text-sm inline-flex items-center gap-1 hover:underline cursor-pointer">
+                <span>Veure exemple de pla per a aquest gimnàs</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </article>
 
-        <div class="form-group">
-          <label for="altura">Altura (cm):</label>
-          <input type="number" id="altura" name="altura" placeholder="Ej. 178" required>
-        </div>
-
-        <div class="form-group">
-          <label for="objetivo">Objetivo Físico:</label>
-          <select id="objetivo" name="objetivo">
-            <option value="volumen">Subir de peso / Ganar masa muscular</option>
-            <option value="definicion">Bajar de peso / Definir</option>
-            <option value="mantenimiento">Mantenimiento y salud</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="gimnasio">Selecciona tu Gimnasio:</label>
-          <select id="gimnasio" name="gimnasio">
-            <option value="mcfit">Basic-Fit / McFit Central</option>
-            <option value="synergym">Synergym Fitness</option>
-            <option value="municipal">Gimnasio Municipal</option>
-          </select>
-        </div>
-
-        <button type="submit">Generar mi Dieta y Rutina &rarr;</button>
-      </form>
+        <!-- Tarjeta 2: Synergym Fitness -->
+        <article class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col">
+          <div class="relative h-52 bg-slate-800 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80"
+              onerror="this.onerror=null; this.src='https://placehold.co/800x450/1e293b/38bdf8?text=Synergym+Fitness';"
+              alt="Zona d'entrenament funcional i màquines de palanca"
+              class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-[#1e293b]/90 text-[#38bdf8] text-xs font-bold px-2.5 py-1 rounded-md">
+              Centre Auditado #02
+            </span>
+          </div>
+          <div class="p-6 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">2. Synergym Fitness</h3>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                <strong>Equipament disponible:</strong> Màquines de palanques, Extensió de quàdriceps, Femoral tombat, Rack de sentadetes.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex flex-wrap gap-3 justify-between items-center">
+              <button type="button" onclick="selectGymAndGenerate('synergym')"
+                class="text-[#0284c7] hover:text-[#0369a1] font-bold text-sm inline-flex items-center gap-1 hover:underline cursor-pointer">
+                <span>Generar pla aquí &rarr;</span>
+              </button>
+              <button type="button" onclick="navigateTo('galeria')"
+                class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs px-3 py-1.5 rounded-md transition-colors cursor-pointer">
+                Veure galeria d'instal·lacions &rarr;
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
+
+    <!-- =====================================================================
+         3. VISTA: PLAN GENERADO (DETALLE PERSONALIZADO)
+         ===================================================================== -->
+    <section id="view-detalle-plan" class="view-section" aria-labelledby="heading-plan">
+      <article class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <header class="border-b border-slate-200 pb-5 mb-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <h2 id="heading-plan" class="text-2xl sm:text-3xl font-bold text-slate-900">
+              Pla Personalitzat #FP-2026-089
+            </h2>
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">
+              Actiu · Adaptat a equipament
+            </span>
+          </div>
+          <p class="text-slate-700 text-sm sm:text-base">
+            Gimnàs Seleccionat: <strong id="mostrar-gimnasio" class="text-[#0284c7]">Basic-Fit / McFit Central</strong>
+            <span class="mx-2 text-slate-300">|</span>
+            Objectiu: <strong id="mostrar-objetivo" class="text-slate-900">Guanyar Massa Muscular</strong>
+          </p>
+        </header>
+
+        <!-- Caja de Datos del Usuario -->
+        <section class="bg-[#e0f2fe] border-l-4 border-[#0284c7] p-4 sm:p-5 rounded-r-lg mb-8">
+          <h3 class="text-base font-bold text-slate-900 mb-2">Dades de l'Usuari</h3>
+          <ul class="flex flex-wrap gap-x-8 gap-y-2 text-sm sm:text-base text-slate-800">
+            <li><strong>Edat:</strong> <span id="mostrar-edad">24</span> anys</li>
+            <li><strong>Pes:</strong> <span id="mostrar-peso">75.5</span> kg</li>
+            <li><strong>Altura:</strong> <span id="mostrar-altura">178</span> cm</li>
+            <li><strong>Aportació Estimada:</strong> <span id="mostrar-kcal" class="font-bold text-[#0369a1]">2.800 kcal/dia</span></li>
+          </ul>
+        </section>
+
+        <!-- 1. Dieta Recomanada -->
+        <section class="mb-8">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">1. Dieta Recomanada</h3>
+          <div class="overflow-x-auto rounded-lg border border-slate-200">
+            <table class="w-full border-collapse text-left text-sm">
+              <thead>
+                <tr class="bg-[#f1f5f9] text-slate-800">
+                  <th class="border-b border-slate-200 p-3 font-bold">Àpat</th>
+                  <th class="border-b border-slate-200 p-3 font-bold">Aliments Suggerits</th>
+                  <th class="border-b border-slate-200 p-3 font-bold">Macronutrients</th>
+                </tr>
+              </thead>
+              <tbody id="plan-dieta-body" class="divide-y divide-slate-200">
+                <tr>
+                  <td class="p-3 font-semibold">Esmorzar</td>
+                  <td class="p-3">Cereal d'avena amb llet, plàtan i truita de 3 ous</td>
+                  <td class="p-3 font-medium text-slate-700">35g Prot / 65g Carbs</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold">Dinar</td>
+                  <td class="p-3">Arròs integral amb pit de pollastre i verdures al vapor</td>
+                  <td class="p-3 font-medium text-slate-700">45g Prot / 80g Carbs</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold">Sopar</td>
+                  <td class="p-3">Filet de salmó a la planxa amb creïlla bullida</td>
+                  <td class="p-3 font-medium text-slate-700">40g Prot / 40g Carbs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-3">
+            <button type="button" onclick="navigateTo('tabla')"
+              class="text-[#0284c7] hover:text-[#0369a1] font-bold text-sm hover:underline cursor-pointer">
+              Veure desglossament complet de macronutrients i calories &rarr;
+            </button>
+          </div>
+        </section>
+
+        <!-- 2. Rutina d'Entrenament Adaptada -->
+        <section class="mb-6">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">2. Rutina d'Entrenament Adaptada</h3>
+          <div class="overflow-x-auto rounded-lg border border-slate-200">
+            <table class="w-full border-collapse text-left text-sm">
+              <thead>
+                <tr class="bg-[#f1f5f9] text-slate-800">
+                  <th class="border-b border-slate-200 p-3 font-bold">Exercici</th>
+                  <th class="border-b border-slate-200 p-3 font-bold">Màquina del Gimnàs</th>
+                  <th class="border-b border-slate-200 p-3 font-bold">Sèries x Repeticions</th>
+                </tr>
+              </thead>
+              <tbody id="plan-rutina-body" class="divide-y divide-slate-200">
+                <tr>
+                  <td class="p-3 font-semibold">Press de Pit</td>
+                  <td class="p-3">Màquina Convergent / Multipower</td>
+                  <td class="p-3 font-medium text-slate-700">4 sèries x 8-10 reps</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold">Premsa de Cames</td>
+                  <td class="p-3">Premsa Inclinada 45°</td>
+                  <td class="p-3 font-medium text-slate-700">4 sèries x 10-12 reps</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold">Jaló al Pit</td>
+                  <td class="p-3">Politja Alta amb Agarre Ample</td>
+                  <td class="p-3 font-medium text-slate-700">3 sèries x 12 reps</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="pt-4 border-t border-slate-200 flex flex-wrap justify-between items-center gap-3">
+          <button type="button" onclick="navigateTo('catalogo')"
+            class="text-slate-600 hover:text-slate-900 font-semibold text-sm hover:underline cursor-pointer">
+            &larr; Tornar al catàleg de gimnasos
+          </button>
+          <button type="button" onclick="navigateTo('inicio')"
+            class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm px-4 py-2 rounded-lg transition-colors cursor-pointer">
+            Recalcular dades
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- =====================================================================
+         4. VISTA: DIETA (TABLA NUTRICIONAL COMPLEJA Y ACCESIBLE)
+         ===================================================================== -->
+    <section id="view-tabla" class="view-section" aria-labelledby="tabla-titulo">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8 overflow-x-auto">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <span class="bg-sky-100 text-[#0369a1] text-xs font-bold px-2.5 py-1 rounded-md">
+            Tabla Accesible WCAG · Navegable por Teclado
+          </span>
+          <span class="text-xs text-slate-500">Usa la tecla <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded">Tab</kbd> para explorar celdas</span>
+        </div>
+
+        <table aria-labelledby="tabla-titulo" class="w-full border-collapse text-left text-sm">
+          <caption id="tabla-titulo" class="text-lg font-bold text-slate-900 text-left mb-4">
+            Distribución diaria de comidas, macronutrientes y aporte calórico (Plan Hipertrofia 2.800 kcal)
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" tabindex="0" class="p-3 border border-slate-300 bg-[#e0f2fe] text-[#0369a1] font-bold">Toma / Hora</th>
+              <th scope="col" tabindex="0" class="p-3 border border-slate-300 bg-[#e0f2fe] text-[#0369a1] font-bold">Alimentos Sugeridos</th>
+              <th scope="col" tabindex="0" class="p-3 border border-slate-300 bg-[#e0f2fe] text-[#0369a1] font-bold">Proteínas (g)</th>
+              <th scope="col" tabindex="0" class="p-3 border border-slate-300 bg-[#e0f2fe] text-[#0369a1] font-bold">Carbohidratos (g)</th>
+              <th scope="col" tabindex="0" class="p-3 border border-slate-300 bg-[#e0f2fe] text-[#0369a1] font-bold">Grasas (g)</th>
+              <th scope="col" tabindex="0" class="p-3 border border-slate-300 bg-[#e0f2fe] text-[#0369a1] font-bold">Energía (kcal)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" tabindex="0" class="p-3 border border-slate-300 bg-[#f1f5f9] font-semibold">Desayuno (08:30)</th>
+              <td tabindex="0" class="p-3 border border-slate-300">Copos de avena (100g), leche desnatada (250ml), 3 huevos enteros y 1 plátano</td>
+              <td tabindex="0" class="p-3 border border-slate-300">35</td>
+              <td tabindex="0" class="p-3 border border-slate-300">75</td>
+              <td tabindex="0" class="p-3 border border-slate-300">18</td>
+              <td tabindex="0" class="p-3 border border-slate-300">600</td>
+            </tr>
+            <tr>
+              <th scope="row" tabindex="0" class="p-3 border border-slate-300 bg-[#f1f5f9] font-semibold">Almuerzo (14:00)</th>
+              <td tabindex="0" class="p-3 border border-slate-300">Pechuga de pollo a la plancha (200g), arroz integral (120g) y aceite de oliva (10g)</td>
+              <td tabindex="0" class="p-3 border border-slate-300">48</td>
+              <td tabindex="0" class="p-3 border border-slate-300">90</td>
+              <td tabindex="0" class="p-3 border border-slate-300">14</td>
+              <td tabindex="0" class="p-3 border border-slate-300">680</td>
+            </tr>
+            <tr>
+              <th scope="row" tabindex="0" class="p-3 border border-slate-300 bg-[#f1f5f9] font-semibold">Merienda (17:30)</th>
+              <td tabindex="0" class="p-3 border border-slate-300">Yogur griego natural (200g), nueces (30g) y proteína de suero (30g)</td>
+              <td tabindex="0" class="p-3 border border-slate-300">32</td>
+              <td tabindex="0" class="p-3 border border-slate-300">15</td>
+              <td tabindex="0" class="p-3 border border-slate-300">20</td>
+              <td tabindex="0" class="p-3 border border-slate-300">370</td>
+            </tr>
+            <tr>
+              <th scope="row" tabindex="0" class="p-3 border border-slate-300 bg-[#f1f5f9] font-semibold">Cena (21:30)</th>
+              <td tabindex="0" class="p-3 border border-slate-300">Filete de salmón fresco (180g), patata cocida (250g) y ensalada variada</td>
+              <td tabindex="0" class="p-3 border border-slate-300">40</td>
+              <td tabindex="0" class="p-3 border border-slate-300">50</td>
+              <td tabindex="0" class="p-3 border border-slate-300">22</td>
+              <td tabindex="0" class="p-3 border border-slate-300">560</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-[#f8fafc] font-bold">
+              <th scope="row" id="total-label" colspan="2" tabindex="0" class="p-3 border border-slate-300">Cómputo Total Diario</th>
+              <td tabindex="0" class="p-3 border border-slate-300"><strong>155 g</strong></td>
+              <td tabindex="0" class="p-3 border border-slate-300"><strong>230 g</strong></td>
+              <td tabindex="0" class="p-3 border border-slate-300"><strong>74 g</strong></td>
+              <td tabindex="0" class="p-3 border border-slate-300"><strong>2.210 kcal</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. VISTA: GALERÍA (INSTALACIONES SYNERGYM)
+         ===================================================================== -->
+    <section id="view-galeria" class="view-section" aria-labelledby="heading-galeria">
+      <article class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <header class="mb-5">
+          <h2 id="heading-galeria" class="text-2xl sm:text-3xl font-bold text-[#0284c7] leading-tight">
+            Equipamiento y Zona de Peso Libre: Synergym Fitness
+          </h2>
+          <p class="text-sm text-slate-500 mt-1.5">
+            Publicado por <strong class="text-slate-700">FitPlan Studio</strong> · Actualizado en Octubre de 2026
+          </p>
+        </header>
+
+        <p class="text-slate-700 leading-relaxed mb-6">
+          Consulta las instalaciones de Synergym. Este centro dispone de zona de peso libre con bancos reclinables, 
+          mancuerneros completos, jaulas de sentadillas y poleas ajustables.
+        </p>
+
+        <!-- Figura principal responsive -->
+        <figure class="mb-6">
+          <picture>
+            <source media="(max-width: 480px)" srcset="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=480&q=80">
+            <source media="(max-width: 768px)" srcset="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=768&q=80">
+            <img 
+              src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=80"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x650/1e293b/38bdf8?text=Zona+de+Peso+Libre+Synergym';"
+              alt="Sala de entrenamiento de gimnasio Synergym con suelo técnico, bancos de musculación ajustables, racks de mancuernera y zonas de peso libre"
+              loading="lazy"
+              class="w-full h-auto max-h-[440px] object-cover rounded-lg shadow-sm">
+          </picture>
+          <figcaption class="text-sm text-slate-500 text-center mt-2.5">
+            Zona de pesas y bancos ajustables en el gimnasio Synergym.
+          </figcaption>
+        </figure>
+
+        <!-- Cuadrícula adicional de detalle de equipamiento -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <figure class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <img
+              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80"
+              onerror="this.onerror=null; this.src='https://placehold.co/600x360/1e293b/38bdf8?text=Rack+de+Mancuernas';"
+              alt="Rack de mancuernas de 2kg a 40kg y discos olímpicos"
+              loading="lazy"
+              class="w-full h-44 object-cover rounded-md">
+            <figcaption class="text-xs text-slate-600 text-center mt-2">
+              Rack completo de mancuernas de 2kg a 40kg.
+            </figcaption>
+          </figure>
+          <figure class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <img
+              src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=600&q=80"
+              onerror="this.onerror=null; this.src='https://placehold.co/600x360/1e293b/38bdf8?text=Jaulas+y+Multipower';"
+              alt="Jaulas de sentadillas y máquinas de palancas en Synergym"
+              loading="lazy"
+              class="w-full h-44 object-cover rounded-md">
+            <figcaption class="text-xs text-slate-600 text-center mt-2">
+              Jaulas de sentadillas, multipower y soportes para discos.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-slate-800 text-sm sm:text-base">
+          <p>
+            <strong>Equipamiento auditado:</strong> Bancos regulables, rack de mancuernas de 2kg a 40kg, multipower y soportes para discos.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <!-- =====================================================================
+         6. VISTA: REGISTRO (FORMULARIO DE PERFIL ANTROPOMÉTRICO)
+         ===================================================================== -->
+    <section id="view-formulario" class="view-section" aria-labelledby="heading-registro">
+      <div class="max-w-xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <h2 id="heading-registro" class="text-2xl font-bold text-[#0284c7] mb-2">
+          Crear Perfil en FitPlan Generator
+        </h2>
+        <p class="text-slate-600 text-sm mb-6">
+          Completa tus datos para calcular tu plan nutricional y rutina personalizada. Los campos marcados con <span class="text-[#dc2626] font-bold">*</span> son obligatorios.
+        </p>
+
+        <form id="registroForm" action="#" method="get" novalidate>
+          <fieldset class="border border-slate-300 rounded-lg p-4 sm:p-6 mb-6 space-y-5">
+            <legend class="font-bold px-2 text-slate-900 text-sm sm:text-base">
+              Datos personales y de acceso
+            </legend>
+
+            <!-- Correo electrónico -->
+            <div>
+              <label for="email" class="block font-semibold text-sm text-slate-900 mb-1">
+                Correo electrónico <span class="text-[#dc2626]" aria-hidden="true">*</span>
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="Ej: usuario@ejemplo.com" 
+                aria-describedby="email-help email-err"
+                required
+                class="validated-input w-full px-3.5 py-2.5 text-base border-2 border-slate-300 rounded-md focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-sky-200 transition-colors">
+              <span id="email-help" class="block text-xs text-slate-500 mt-1">
+                Recibirás aquí tu ficha de dieta y rutina en PDF.
+              </span>
+              <span id="email-err" class="error-msg text-xs text-[#dc2626] font-semibold mt-1" role="alert">
+                Introduce un correo electrónico válido (ej. nombre@dominio.com).
+              </span>
+            </div>
+
+            <!-- Teléfono móvil -->
+            <div>
+              <label for="telefono" class="block font-semibold text-sm text-slate-900 mb-1">
+                Teléfono móvil <span class="text-[#dc2626]" aria-hidden="true">*</span>
+              </label>
+              <input 
+                type="tel" 
+                id="telefono" 
+                name="telefono" 
+                placeholder="+34 666 777 888" 
+                pattern="^\+34 [0-9]{3} [0-9]{3} [0-9]{3}$"
+                aria-describedby="tel-help tel-err"
+                required
+                class="validated-input w-full px-3.5 py-2.5 text-base border-2 border-slate-300 rounded-md focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-sky-200 transition-colors">
+              <span id="tel-help" class="block text-xs text-slate-500 mt-1">
+                Formato obligatorio español con espacios: +34 666 777 888
+              </span>
+              <span id="tel-err" class="error-msg text-xs text-[#dc2626] font-semibold mt-1" role="alert">
+                El teléfono debe seguir exactamente el formato +34 XXX XXX XXX.
+              </span>
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div>
+              <label for="nacimiento" class="block font-semibold text-sm text-slate-900 mb-1">
+                Fecha de nacimiento <span class="text-[#dc2626]" aria-hidden="true">*</span>
+              </label>
+              <input 
+                type="date" 
+                id="nacimiento" 
+                name="nacimiento" 
+                min="1926-01-01"
+                max="2008-11-22" 
+                aria-describedby="fecha-help fecha-err"
+                required
+                class="validated-input w-full px-3.5 py-2.5 text-base border-2 border-slate-300 rounded-md focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-sky-200 transition-colors">
+              <span id="fecha-help" class="block text-xs text-slate-500 mt-1">
+                Debes ser mayor de 18 años (nacido antes del 22/11/2008).
+              </span>
+              <span id="fecha-err" class="error-msg text-xs text-[#dc2626] font-semibold mt-1" role="alert">
+                Fecha no válida. Debes tener al menos 18 años cumplidos.
+              </span>
+            </div>
+
+            <!-- Contraseña -->
+            <div>
+              <label for="password" class="block font-semibold text-sm text-slate-900 mb-1">
+                Contraseña <span class="text-[#dc2626]" aria-hidden="true">*</span>
+              </label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                minlength="8" 
+                aria-describedby="pass-help pass-err"
+                required
+                class="validated-input w-full px-3.5 py-2.5 text-base border-2 border-slate-300 rounded-md focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-sky-200 transition-colors">
+              <span id="pass-help" class="block text-xs text-slate-500 mt-1">
+                Mínimo 8 caracteres para proteger tu historial físico.
+              </span>
+              <span id="pass-err" class="error-msg text-xs text-[#dc2626] font-semibold mt-1" role="alert">
+                La contraseña debe contener al menos 8 caracteres.
+              </span>
+            </div>
+
+            <!-- Peso actual (Opcional) -->
+            <div>
+              <label for="peso" class="block font-semibold text-sm text-slate-900 mb-1">
+                Peso actual (kg) (Opcional)
+              </label>
+              <input 
+                type="number" 
+                id="peso" 
+                name="peso" 
+                min="30" 
+                max="250" 
+                step="0.1" 
+                placeholder="Ej: 75.5"
+                aria-describedby="peso-help"
+                class="validated-input w-full px-3.5 py-2.5 text-base border-2 border-slate-300 rounded-md focus:outline-none focus:border-[#0284c7] focus:ring-2 focus:ring-sky-200 transition-colors">
+              <span id="peso-help" class="block text-xs text-slate-500 mt-1">
+                Puedes dejarlo en blanco y configurarlo más tarde en tu perfil.
+              </span>
+            </div>
+          </fieldset>
+
+          <!-- Botones de acción -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button type="submit"
+              class="flex-1 bg-[#0284c7] hover:bg-[#0369a1] text-white font-semibold py-3 px-6 rounded-md transition-colors cursor-pointer">
+              Guardar y Generar Plan
+            </button>
+            <button type="reset"
+              class="bg-slate-200 hover:bg-slate-300 text-slate-900 font-semibold py-3 px-6 rounded-md transition-colors cursor-pointer">
+              Limpiar
+            </button>
+          </div>
+
+          <!-- Banner de confirmación accesible -->
+          <div id="form-feedback" class="hidden mt-5 p-4 rounded-md font-semibold text-sm" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
   </main>
 
-  <footer>
+  <!-- Pie de página unificado -->
+  <footer class="border-t border-slate-200 bg-white mt-12 py-6 px-4 text-center text-slate-500 text-sm">
     <p>&copy; 2026 FitPlan Generator - Projecte LMSGI</p>
   </footer>
 
+  <!-- Lógica de Navegación SPA, Adaptación Dinámica de Planes y Validación -->
+  <script>
+    // Estado global del plan del usuario
+    const userState = {
+      edad: 24,
+      peso: 75.5,
+      altura: 178,
+      objetivo: 'volumen',
+      gimnasio: 'mcfit'
+    };
+
+    // Diccionario de nombres y rutinas adaptadas según gimnasio y objetivo
+    const gymConfigs = {
+      mcfit: {
+        nombre: 'Basic-Fit / McFit Central',
+        rutina: [
+          { ejercicio: 'Press de Pit', maquina: 'Màquina Convergent / Multipower', series: '4 sèries x 8-10 reps' },
+          { ejercicio: 'Premsa de Cames', maquina: 'Premsa Inclinada 45°', series: '4 sèries x 10-12 reps' },
+          { ejercicio: 'Jaló al Pit', maquina: 'Politja Alta amb Agarre Ample', series: '3 sèries x 12 reps' }
+        ]
+      },
+      synergym: {
+        nombre: 'Synergym Fitness',
+        rutina: [
+          { ejercicio: 'Sentadeta Lliure', maquina: 'Rack de Sentadetes Olímpic', series: '4 sèries x 8-10 reps' },
+          { ejercicio: 'Extensió i Femoral', maquina: 'Extensió de Quàdriceps + Femoral Tombat', series: '3 sèries x 12-15 reps' },
+          { ejercicio: 'Rem en Palanca', maquina: 'Màquina de Palanques Convergent', series: '4 sèries x 10 reps' }
+        ]
+      },
+      municipal: {
+        nombre: 'Gimnasio Municipal',
+        rutina: [
+          { ejercicio: 'Press Banca Pla', maquina: 'Banc Olímpic i Barra Lliure', series: '4 sèries x 8-10 reps' },
+          { ejercicio: 'Pes Mort Romanès', maquina: 'Zona de Pes Lliure / Mancuernes', series: '3 sèries x 10 reps' },
+          { ejercicio: 'Dominades Assistides', maquina: 'Barra de Dominades / Politja', series: '3 sèries x 10-12 reps' }
+        ]
+      }
+    };
+
+    const objectiveConfigs = {
+      volumen: {
+        etiqueta: 'Guanyar Massa Muscular',
+        kcal: '2.800 kcal/dia',
+        dieta: [
+          { apat: 'Esmorzar', aliments: "Cereal d'avena amb llet, plàtan i truita de 3 ous", macros: '35g Prot / 65g Carbs' },
+          { apat: 'Dinar', aliments: 'Arròs integral amb pit de pollastre i verdures al vapor', macros: '45g Prot / 80g Carbs' },
+          { apat: 'Sopar', aliments: 'Filet de salmó a la planxa amb creïlla bullida', macros: '40g Prot / 40g Carbs' }
+        ]
+      },
+      definicion: {
+        etiqueta: 'Baixar de Pes / Definir',
+        kcal: '2.050 kcal/dia',
+        dieta: [
+          { apat: 'Esmorzar', aliments: 'Clares d’ou amb 1 ou sencer, torrada integral i cafè sol', macros: '32g Prot / 30g Carbs' },
+          { apat: 'Dinar', aliments: 'Pit de gall dindi a la planxa (220g) amb amanida completa i quinoa (60g)', macros: '48g Prot / 42g Carbs' },
+          { apat: 'Sopar', aliments: 'Lluç al forn amb espàrrecs verds i carbassó', macros: '42g Prot / 15g Carbs' }
+        ]
+      },
+      mantenimiento: {
+        etiqueta: 'Manteniment i Salut',
+        kcal: '2.400 kcal/dia',
+        dieta: [
+          { apat: 'Esmorzar', aliments: 'Iogurt grec natural amb avena (60g) i fruits rojos', macros: '28g Prot / 48g Carbs' },
+          { apat: 'Dinar', aliments: 'Vedella magra o pollastre amb patata rostida i bròquil', macros: '44g Prot / 55g Carbs' },
+          { apat: 'Sopar', aliments: 'Truita francesa de 2 ous amb tonyina al natural i amanida', macros: '38g Prot / 20g Carbs' }
+        ]
+      }
+    };
+
+    /**
+     * Cambia la vista activa y actualiza el estado visual de la barra de navegación
+     */
+    function navigateTo(viewId) {
+      // Ocultar todas las secciones
+      document.querySelectorAll('.view-section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      // Mostrar la sección solicitada
+      const targetSection = document.getElementById('view-' + viewId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      // Actualizar botones de navegación activos
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.dataset.nav === viewId) {
+          btn.classList.add('bg-[#0284c7]', 'text-white');
+          btn.classList.remove('text-[#38bdf8]', 'hover:bg-slate-800');
+          btn.setAttribute('aria-current', 'page');
+        } else {
+          btn.classList.remove('bg-[#0284c7]', 'text-white');
+          btn.classList.add('text-[#38bdf8]', 'hover:bg-slate-800');
+          btn.removeAttribute('aria-current');
+        }
+      });
+
+      // Desplazar suavemente hacia arriba al cambiar de pestaña
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /**
+     * Renderiza los datos del plan personalizado en la vista 'detalle-plan'
+     */
+    function renderPlanDetails() {
+      const gym = gymConfigs[userState.gimnasio] || gymConfigs.mcfit;
+      const obj = objectiveConfigs[userState.objetivo] || objectiveConfigs.volumen;
+
+      document.getElementById('mostrar-gimnasio').textContent = gym.nombre;
+      document.getElementById('mostrar-objetivo').textContent = obj.etiqueta;
+      document.getElementById('mostrar-edad').textContent = userState.edad;
+      document.getElementById('mostrar-peso').textContent = userState.peso;
+      document.getElementById('mostrar-altura').textContent = userState.altura;
+      document.getElementById('mostrar-kcal').textContent = obj.kcal;
+
+      // Actualizar tabla de dieta recomendada
+      const dietaBody = document.getElementById('plan-dieta-body');
+      dietaBody.innerHTML = obj.dieta.map(item => `
+        <tr>
+          <td class="p-3 font-semibold">${item.apat}</td>
+          <td class="p-3">${item.aliments}</td>
+          <td class="p-3 font-medium text-slate-700">${item.macros}</td>
+        </tr>
+      `).join('');
+
+      // Actualizar tabla de rutina adaptada al gimnasio
+      const rutinaBody = document.getElementById('plan-rutina-body');
+      rutinaBody.innerHTML = gym.rutina.map(item => `
+        <tr>
+          <td class="p-3 font-semibold">${item.ejercicio}</td>
+          <td class="p-3">${item.maquina}</td>
+          <td class="p-3 font-medium text-slate-700">${item.series}</td>
+        </tr>
+      `).join('');
+    }
+
+    /**
+     * Permite seleccionar un gimnasio directamente desde el catálogo y navegar al plan
+     */
+    function selectGymAndGenerate(gymKey) {
+      userState.gimnasio = gymKey;
+      document.getElementById('gen-gimnasio').value = gymKey;
+      renderPlanDetails();
+      navigateTo('detalle-plan');
+    }
+
+    // Inicialización al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      // Comprobar parámetros URL por compatibilidad directa con enlaces externos
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('edad')) userState.edad = params.get('edad');
+      if (params.get('peso')) userState.peso = params.get('peso');
+      if (params.get('altura')) userState.altura = params.get('altura');
+      if (params.get('objetivo') && objectiveConfigs[params.get('objetivo')]) {
+        userState.objetivo = params.get('objetivo');
+      }
+      if (params.get('gimnasio') && gymConfigs[params.get('gimnasio')]) {
+        userState.gimnasio = params.get('gimnasio');
+      }
+
+      renderPlanDetails();
+      navigateTo('inicio');
+
+      // Manejador del formulario de Inicio (Generador de Plan)
+      const generatorForm = document.getElementById('generatorForm');
+      generatorForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        userState.edad = document.getElementById('gen-edad').value || 24;
+        userState.peso = document.getElementById('gen-peso').value || 75.5;
+        userState.altura = document.getElementById('gen-altura').value || 178;
+        userState.objetivo = document.getElementById('gen-objetivo').value;
+        userState.gimnasio = document.getElementById('gen-gimnasio').value;
+
+        renderPlanDetails();
+        navigateTo('detalle-plan');
+      });
+
+      // Manejador del formulario de Registro (Perfil Antropométrico)
+      const registroForm = document.getElementById('registroForm');
+      const feedback = document.getElementById('form-feedback');
+
+      registroForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (registroForm.checkValidity()) {
+          // Si introdujo peso opcional, actualizarlo también en el estado
+          const pesoInput = document.getElementById('peso').value;
+          if (pesoInput) {
+            userState.peso = pesoInput;
+            document.getElementById('gen-peso').value = pesoInput;
+            renderPlanDetails();
+          }
+
+          feedback.textContent = '✅ ¡Perfil validado correctamente! Generando tu dieta y rutina adaptada...';
+          feedback.className = 'block mt-5 p-4 rounded-md font-semibold text-sm bg-emerald-100 text-emerald-900 border border-emerald-300';
+        } else {
+          // Mostrar los mensajes de error nativos y visuales en los campos inválidos
+          registroForm.reportValidity();
+          feedback.textContent = '⚠️ Por favor, revisa los campos obligatorios marcados en rojo antes de continuar.';
+          feedback.className = 'block mt-5 p-4 rounded-md font-semibold text-sm bg-red-100 text-red-900 border border-red-300';
+        }
+      });
+
+      registroForm.addEventListener('reset', function() {
+        feedback.className = 'hidden mt-5 p-4 rounded-md font-semibold text-sm';
+        feedback.textContent = '';
+      });
+    });
+  </script>
 </body>
 </html>

@@ -8,28 +8,34 @@
     :root {
       --primary: #0284c7;
       --text: #0f172a;
-      --bg: #f8fafc;
+      --bg: #f8f9fa;
       --border: #cbd5e1;
       --focus-ring: #0284c7;
     }
 
     body {
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: Arial, sans-serif;
       line-height: 1.5;
       color: var(--text);
       background-color: var(--bg);
-      padding: 2rem;
+      padding: 20px;
       margin: 0;
     }
 
+    header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; flex-wrap: wrap; gap: 10px; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; flex-wrap: wrap; }
+    nav a { color: #38bdf8; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+
     .table-container {
       max-width: 900px;
-      margin: 0 auto;
+      margin: 20px auto;
       overflow-x: auto;
       background: #ffffff;
       padding: 1.5rem;
       border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     table {
@@ -69,19 +75,33 @@
       font-weight: 700;
     }
 
-    /* Foco visible claro para navegación con teclado */
     table :focus {
       outline: 3px solid var(--focus-ring);
       outline-offset: -2px;
     }
 
-    /* Permitir la tabulación en celdas para pruebas de teclado */
     [tabindex="0"]:focus {
       background-color: #f0f9ff;
     }
+
+    footer { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 10px; text-align: center; color: #666; }
   </style>
 </head>
 <body>
+
+  <header>
+    <h1>FitPlan Generator</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Gimnasios</a></li>
+        <li><a href="detalle-plan.html">Pla Generat</a></li>
+        <li><a href="tabla.html">Dieta (Taula)</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="formulario.html">Registre</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main class="table-container">
     <table aria-labelledby="tabla-titulo">
@@ -143,6 +163,10 @@
       </tfoot>
     </table>
   </main>
+
+  <footer>
+    <p>&copy; 2026 FitPlan Generator - Projecte LMSGI</p>
+  </footer>
 
 </body>
 </html>

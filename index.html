@@ -6,10 +6,11 @@
   <title>FitPlan Generator - Inicio</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; line-height: 1.6; background-color: #f8f9fa; }
-    header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; }
+    header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; flex-wrap: wrap; gap: 10px; }
     header h1 { margin: 0; font-size: 1.4rem; }
-    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; flex-wrap: wrap; }
     nav a { color: #38bdf8; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
     main { max-width: 800px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     .form-group { margin-bottom: 15px; }
     label { display: block; font-weight: bold; margin-bottom: 5px; }
@@ -20,14 +21,16 @@
 </head>
 <body>
 
-  <!-- Encabezado y Navegación Principal (Actividad 5) -->
   <header>
     <h1>FitPlan Generator</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Inicio / Formulario</a></li>
+        <li><a href="index.html">Inicio</a></li>
         <li><a href="catalogo.html">Gimnasios</a></li>
-        <li><a href="detalle-plan.html">Ver Plan Generado</a></li>
+        <li><a href="detalle-plan.html">Pla Generat</a></li>
+        <li><a href="tabla.html">Dieta (Taula)</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="formulario.html">Registre</a></li>
       </ul>
     </nav>
   </header>
@@ -38,7 +41,6 @@
       <p>Introduce tus datos personales y el gimnasio al que asistes para generar tu rutina adaptada a las máquinas disponibles y tu dieta personalizada.</p>
     </section>
 
-    <!-- Formulario de Entrada de Datos -->
     <section>
       <form action="detalle-plan.html" method="get">
         <div class="form-group">
@@ -80,7 +82,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 FitPlan Generator - Proyecto LMSGI ASIX</p>
+    <p>&copy; 2026 FitPlan Generator - Projecte LMSGI</p>
   </footer>
 
 </body>

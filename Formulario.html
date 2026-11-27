@@ -11,7 +11,7 @@
       --primary-hover: #0369a1;
       --text: #0f172a;
       --muted: #475569;
-      --bg: #f8fafc;
+      --bg: #f8f9fa;
       --border: #cbd5e1;
       --error: #dc2626;
       --success: #16a34a;
@@ -20,24 +20,30 @@
     * { box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: Arial, sans-serif;
       line-height: 1.5;
       color: var(--text);
       background-color: var(--bg);
-      padding: 2rem 1rem;
+      padding: 20px;
       margin: 0;
     }
 
+    header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; flex-wrap: wrap; gap: 10px; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; flex-wrap: wrap; }
+    nav a { color: #38bdf8; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+
     main {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 20px auto;
       background: #ffffff;
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    h1 {
+    main h1 {
       margin-top: 0;
       font-size: 1.6rem;
       color: var(--primary);
@@ -85,7 +91,6 @@
       box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
     }
 
-    /* Estilos visuales en tiempo real (Validación cliente) */
     input:user-invalid {
       border-color: var(--error);
     }
@@ -156,9 +161,25 @@
       color: #166534;
       border: 1px solid #86efac;
     }
+
+    footer { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 10px; text-align: center; color: #666; }
   </style>
 </head>
 <body>
+
+  <header>
+    <h1>FitPlan Generator</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Gimnasios</a></li>
+        <li><a href="detalle-plan.html">Pla Generat</a></li>
+        <li><a href="tabla.html">Dieta (Taula)</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="formulario.html">Registre</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
     <h1>Crear Perfil en FitPlan Generator</h1>
@@ -168,7 +189,6 @@
       <fieldset>
         <legend>Datos personales y de acceso</legend>
 
-        <!-- Email -->
         <div class="form-group">
           <label for="email">Correo electrónico <span class="required-mark" aria-hidden="true">*</span></label>
           <input 
@@ -182,7 +202,6 @@
           <span id="email-err" class="error-msg" role="alert">Introduce un correo electrónico válido (ej. nombre@dominio.com).</span>
         </div>
 
-        <!-- Teléfono -->
         <div class="form-group">
           <label for="telefono">Teléfono móvil <span class="required-mark" aria-hidden="true">*</span></label>
           <input 
@@ -197,7 +216,6 @@
           <span id="tel-err" class="error-msg" role="alert">El teléfono debe seguir exactamente el formato +34 XXX XXX XXX.</span>
         </div>
 
-        <!-- Fecha de nacimiento (Mayor de 18 años respecto a Noviembre 2026) -->
         <div class="form-group">
           <label for="nacimiento">Fecha de nacimiento <span class="required-mark" aria-hidden="true">*</span></label>
           <input 
@@ -212,7 +230,6 @@
           <span id="fecha-err" class="error-msg" role="alert">Fecha no válida. Debes tener al menos 18 años cumplidos.</span>
         </div>
 
-        <!-- Contraseña -->
         <div class="form-group">
           <label for="password">Contraseña <span class="required-mark" aria-hidden="true">*</span></label>
           <input 
@@ -226,7 +243,6 @@
           <span id="pass-err" class="error-msg" role="alert">La contraseña debe contener al menos 8 caracteres.</span>
         </div>
 
-        <!-- Campo opcional (para caso edge de mínimos) -->
         <div class="form-group">
           <label for="peso">Peso actual (kg) (Opcional)</label>
           <input 
@@ -250,6 +266,10 @@
       <div id="form-feedback" class="status-banner" role="status" aria-live="polite"></div>
     </form>
   </main>
+
+  <footer>
+    <p>&copy; 2026 FitPlan Generator - Projecte LMSGI</p>
+  </footer>
 
   <script>
     const form = document.getElementById('registroForm');

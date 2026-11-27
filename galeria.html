@@ -6,7 +6,6 @@
   <meta name="description" content="Guía de equipamiento e instalaciones en Synergym con FitPlan Generator.">
   <title>FitPlan Generator - Instalaciones Synergym</title>
 
-  <!-- Metadatos Estructurados JSON-LD (Schema.org) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,24 +35,30 @@
 
   <style>
     body {
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
       color: #0f172a;
-      background-color: #f8fafc;
+      background-color: #f8f9fa;
       padding: 20px;
       margin: 0;
     }
 
+    body > header { background: #1e293b; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; flex-wrap: wrap; gap: 10px; }
+    body > header h1 { margin: 0; font-size: 1.4rem; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; flex-wrap: wrap; }
+    nav a { color: #38bdf8; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+
     main {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto;
       background: #ffffff;
       padding: 24px;
       border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    h1 {
+    article h1 {
       color: #0284c7;
       font-size: 1.8rem;
     }
@@ -75,9 +80,25 @@
       color: #64748b;
       text-align: center;
     }
+
+    footer { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 10px; text-align: center; color: #666; }
   </style>
 </head>
 <body>
+
+  <header>
+    <h1>FitPlan Generator</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Gimnasios</a></li>
+        <li><a href="detalle-plan.html">Pla Generat</a></li>
+        <li><a href="tabla.html">Dieta (Taula)</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="formulario.html">Registre</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
     <article>
@@ -91,15 +112,12 @@
         mancuerneros completos, jaulas de sentadillas y poleas ajustables.
       </p>
 
-      <!-- Recurso Multimedia Adaptable con tu foto -->
       <figure>
         <picture>
-          <!-- Formato WebP preferente -->
           <source media="(max-width: 480px)" srcset="assets/images/rutina-ejemplo-480w.jpeg" type="image/webp">
           <source media="(max-width: 768px)" srcset="assets/images/rutina-ejemplo-768w.jpeg" type="image/webp">
           <source media="(min-width: 769px)" srcset="assets/images/rutina-ejemplo-1920w.jpeg" type="image/webp">
 
-          <!-- Fallback JPG -->
           <img 
             src="assets/images/rutina-ejemplo-768w.jpg" 
             srcset="assets/images/rutina-ejemplo-480w.jpeg 480w,
@@ -117,6 +135,10 @@
       </p>
     </article>
   </main>
+
+  <footer>
+    <p>&copy; 2026 FitPlan Generator - Projecte LMSGI</p>
+  </footer>
 
 </body>
 </html>
